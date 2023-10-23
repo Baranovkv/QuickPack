@@ -14,6 +14,7 @@ struct LuggageView: View {
     //    @Query private var items: [Item]
     @Query private var stuff: [Stuff]
     @State private var isModalPresented = false
+    @State private var searchText = ""
     
     var body: some View {
         
@@ -37,10 +38,18 @@ struct LuggageView: View {
                 }
             }
         }
+        
+        // If user has own lists
         else {
             NavigationStack{
                 List{
-                    ForEach(stuff) { stuff in
+                    HStack {
+//                        Image(systemName: "magnifyingglass")
+                        TextField("Search", text: $searchText)
+//                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    
+                    ForEach(filteredStuff(searchText, stuff: stuff)) { stuff in
                         NavigationLink(stuff.name) {
                             StuffView(currentStuffName: stuff.name)
                         }
@@ -59,15 +68,26 @@ struct LuggageView: View {
                             NewBagNameView()
                         }
                     }
-//                    ToolbarItem(placement: .navigationBarTrailing) {
-//                        EditButton()
-//                    }
+                    //                    ToolbarItem(placement: .navigationBarTrailing) {
+                    //                        EditButton()
+                    //                    }
                     
                 }
                 .navigationTitle("Your Luggage")
             }
         }
     }
+    
+    func filteredStuff(_ searchText: String, stuff: [Stuff]) -> [Stuff] {
+        
+            if searchText.isEmpty {
+                return stuff
+            } else {
+                return stuff.filter { $0.name.lowercased().contains(searchText.lowercased())
+                }
+            }
+        }
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {

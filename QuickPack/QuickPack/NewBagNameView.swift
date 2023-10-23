@@ -16,12 +16,12 @@ struct NewBagNameView: View {
                 Text("Prepare for")
                 TextField("Enter New Bag Name", text: $newBagName)
                     .multilineTextAlignment(.center)
-                
+                                
                 NavigationLink(destination: CollectionView(newBagName: newBagName)) {
                     Text("Go!")
                         .font(.headline)
                         .padding()
-                        .background(Color.blue)
+                        .background(newBagName.isEmpty ? Color.gray : Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
