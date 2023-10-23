@@ -18,75 +18,57 @@ struct LuggageView: View {
     
     var body: some View {
         
-        if stuff.isEmpty {
-            NavigationView {
-                VStack {
-                    Text("Looks like you are going somewhere.")
+        NavigationStack{
+            List{
+                TextField("Search", text: $searchText)
+                
+                if stuff.isEmpty {
+//                    VStack(alignment: .leading, content: {
+//                        Text("Looks like you want to prepare a trip.")
+                        HStack {
+                            Text("Let's create a new bag! Tap")
+                            Image(systemName: "plus").foregroundColor(.blue)
+                            Image(systemName: "arrow.up.right")
+                        }
+//                    })
+                }
+                
+                ForEach(filteredStuff(searchText, stuff: stuff)) { stuff in
+                    NavigationLink(stuff.name) {
+                        StuffView(currentStuffName: stuff.name)
+                    }
+                }
+                .onDelete(perform: deleteItems)
+            }
+            .toolbar {
+                ToolbarItem {
                     Button(action: {
                         isModalPresented.toggle()
                     }) {
-                        Text("Let's create a new bag")
-                            .font(.headline)
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                        Text(Image(systemName: "plus"))
+                        
                     }
                     .sheet(isPresented: $isModalPresented) {
                         NewBagNameView()
                     }
                 }
+                //                    ToolbarItem(placement: .navigationBarTrailing) {
+                //                        EditButton()
+                //                    }
             }
-        }
-        
-        // If user has own lists
-        else {
-            NavigationStack{
-                List{
-                    HStack {
-//                        Image(systemName: "magnifyingglass")
-                        TextField("Search", text: $searchText)
-//                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                    }
-                    
-                    ForEach(filteredStuff(searchText, stuff: stuff)) { stuff in
-                        NavigationLink(stuff.name) {
-                            StuffView(currentStuffName: stuff.name)
-                        }
-                    }
-                    .onDelete(perform: deleteItems)
-                }
-                .toolbar {
-                    ToolbarItem {
-                        Button(action: {
-                            isModalPresented.toggle()
-                        }) {
-                            Text(Image(systemName: "plus"))
-                            
-                        }
-                        .sheet(isPresented: $isModalPresented) {
-                            NewBagNameView()
-                        }
-                    }
-                    //                    ToolbarItem(placement: .navigationBarTrailing) {
-                    //                        EditButton()
-                    //                    }
-                    
-                }
-                .navigationTitle("Your Luggage")
-            }
+            .navigationTitle("Your Luggage")
         }
     }
     
     func filteredStuff(_ searchText: String, stuff: [Stuff]) -> [Stuff] {
         
-            if searchText.isEmpty {
-                return stuff
-            } else {
-                return stuff.filter { $0.name.lowercased().contains(searchText.lowercased())
-                }
+        if searchText.isEmpty {
+            return stuff
+        } else {
+            return stuff.filter { $0.name.lowercased().contains(searchText.lowercased())
             }
         }
+    }
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
@@ -101,4 +83,5 @@ struct LuggageView: View {
 
 #Preview {
     LuggageView()
+        .modelContainer(for: Stuff.self, inMemory: true)
 }
