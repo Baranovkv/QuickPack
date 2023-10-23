@@ -23,7 +23,11 @@ struct StuffView: View {
                         HStack {
                             Text(item.name)
                             Spacer()
-                            Image(systemName: item.isChecked ? "checkmark.square" : "square")
+                            Button {
+                                item.isChecked.toggle()
+                            } label: {
+                                Image(systemName: item.isChecked ? "checkmark.square" : "square")
+                            }
                         }
                     }
                 }
@@ -74,5 +78,5 @@ struct StuffView: View {
 
 #Preview {
     StuffView(currentStuffName: "Stuff View")
-//        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Item.self, inMemory: true)
 }
