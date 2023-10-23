@@ -29,8 +29,10 @@ struct CollectionCard: View {
             .foregroundColor(.white)
             .padding()
             
-            NavigationLink(destination: NewStuffView(currentCollection: collection, newBagName: newBagName)) {
-                EmptyView()
+            if newBagName != "" {
+                NavigationLink(destination: NewStuffView(currentCollection: collection, newBagName: newBagName)) {
+                    EmptyView()
+                }
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: 20))

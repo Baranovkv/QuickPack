@@ -14,10 +14,11 @@ struct NewStuffView: View {
     @Query private var items: [Item]
     @State private var newItem: String = ""
     var currentCollection: CollectionItem // for pre-compiled list
-    var newBagName: String
+    @State var newBagName: String
     
     var body: some View {
         NavigationStack {
+            
             List {
                 ForEach(items) { item in
                     if item.stuff?.name == newBagName {

@@ -10,11 +10,14 @@ import SwiftUI
 struct CollectionView: View {
     
     var collectionList = CollectionList.share
-    var newBagName: String
+    @State var newBagName = ""
 
     var body: some View {
         
         NavigationStack{
+                    TextField("Enter New Bag Name", text: $newBagName)
+                        .font(.title)
+                        .multilineTextAlignment(.center)
             
             List {
                     LazyVGrid(columns:
@@ -37,7 +40,6 @@ struct CollectionView: View {
                         }
                         
                     })
-                    .navigationTitle(newBagName)
                 }
             }
         }
@@ -46,5 +48,5 @@ struct CollectionView: View {
 
 
 #Preview {
-    CollectionView(newBagName: "New Bag")
+    CollectionView()
 }

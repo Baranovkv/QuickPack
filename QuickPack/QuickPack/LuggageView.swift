@@ -49,7 +49,7 @@ struct LuggageView: View {
                         
                     }
                     .sheet(isPresented: $isModalPresented) {
-                        NewBagNameView()
+                        CollectionView()
                     }
                 }
                 //                    ToolbarItem(placement: .navigationBarTrailing) {
@@ -78,8 +78,6 @@ struct LuggageView: View {
         }
     }
 }
-
-
 
 #Preview {
     LuggageView()
