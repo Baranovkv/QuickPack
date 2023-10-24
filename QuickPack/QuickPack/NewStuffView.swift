@@ -13,12 +13,11 @@ struct NewStuffView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     @State private var newItem: String = ""
+    @Binding var isModalPresented: Bool
     var currentCollection: CollectionItem // for pre-compiled list
-    @State var newBagName: String
+    @State var newBagName = "New Bag"
     
     var body: some View {
-        NavigationStack {
-            
             List {
                 ForEach(items) { item in
                     if item.stuff?.name == newBagName {
@@ -42,18 +41,16 @@ struct NewStuffView: View {
                     })
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-//                ToolbarItem {
-//                    Button(action: addItem) {
-//                        Label("Add Item", systemImage: "plus")
-//                    }
-//                }
+           .toolbar {
+               ToolbarItem(placement: .navigationBarTrailing) {
+                   Button("Done"){
+                       isModalPresented = false
+                   }
+               }
+                
             }
+        
             .navigationTitle(newBagName)
-        }
     }
     
     private func addItem() {
@@ -73,6 +70,7 @@ struct NewStuffView: View {
 }
 
 #Preview {
-    NewStuffView(currentCollection: CollectionList.share.collections[0], newBagName: "New Stuff View")
+    NewStuffView(isModalPresented: .constant(false), currentCollection: CollectionList.share.collections[0], newBagName: "New Stuff View")
         .modelContainer(for: Item.self, inMemory: true)
 }
+

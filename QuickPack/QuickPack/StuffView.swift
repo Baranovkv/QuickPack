@@ -48,15 +48,9 @@ struct StuffView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
-//                ToolbarItem {
-//                    Button(action: addItem) {
-//                        Label("Add Item", systemImage: "plus")
-//                    }
-//                }
             }
             .navigationTitle(currentStuffName)
-//        } detail: {
-//            Text("Select an item")
+
         }
     }
     
