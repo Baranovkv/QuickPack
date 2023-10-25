@@ -24,7 +24,7 @@ struct CollectionView: View {
                                 [GridItem(.flexible(), spacing: 20, alignment: .center),
                                  GridItem(.flexible(), spacing: 20, alignment: .center)],
                               content: {
-                        CollectionCard(collection: CollectionItem(name: "From Stratch", imageName: "emptylist", items: [String]()), newBagName: newBagName)
+                        CollectionCard(collection: CollectionItem(name: "FROM SCRATCH", imageName: "emptylist", items: [String]()), newBagName: newBagName)
                     })
                 
                 

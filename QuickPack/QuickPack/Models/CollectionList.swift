@@ -12,27 +12,53 @@ struct CollectionList {
     let collections: [CollectionItem]
     
     static let share = CollectionList(collections: [
-        CollectionItem(name: "Sea And Beach",
+        CollectionItem(name: "SEA & BEACH",
                         imageName: "seaandbeach",
                         items: [
                           "Passport",
                           "Phone",
-                          "Towel",
+                          "Insurance documents",
+                          "Charger",
+                          "Cash",
+                          "Credit/debit cards",
+                          "Swimwear",
                           "Sunglasses",
                           "Sunscreen",
-                          "Slippers"
-                        ]
-                       ),
+                          "Light clothing",
+                          "Slippers",
+                          "Hat",
+                          "Toiletries (toothbrush, toothpaste)",
+                          "First-aid kit",
+                          "Insect repellent",
+                          "Beach towels"
+                        ]),
         
-        CollectionItem(name: "Mountains",
-                        imageName: "mountains",
+        CollectionItem(name: "SKIING",
+                        imageName: "skiing",
                         items: [
                            "Passport",
                            "Phone",
                            "Tent",
                            "Water",
                            "Repellent"
-                        ])
+                        ]),
+        
+        CollectionItem(name: "RIVER TRIP",
+                        imageName: "river",
+                        items: [
+                            ]),
+        CollectionItem(name: "CITY BREAK",
+                        imageName: "citybreak",
+                        items: [
+                            ]),
+        CollectionItem(name: "CAMPING TRIP",
+                        imageName: "camping",
+                        items: [
+                            ]),
+        CollectionItem(name: "BUSINESS TRIP",
+                        imageName: "business",
+                        items: [
+                            ])
     ])
     
     private init(collections: [CollectionItem]) {
