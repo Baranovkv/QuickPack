@@ -12,12 +12,11 @@ struct CollectionCard: View {
     var collection: CollectionItem
     @Binding var isModalPresented: Bool
     var body: some View {
-            ZStack(alignment: .bottomLeading) {
+            ZStack(alignment: .leading) {
                 
                 Image(collection.imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-//                    .frame(maxWidth: 200, maxHeight: .infinity)
                     .clipped()
                    
                 //
@@ -29,7 +28,8 @@ struct CollectionCard: View {
                         .bold()
                     
                 }
-                .foregroundColor(collection.imageName == "emptylist" ? .black : .white)
+//                .foregroundColor(collection.imageName == "emptylist" ? .black : .white)
+                .foregroundColor(.white)
                 .padding()
                 
                 NavigationLink(destination: NewStuffView(isModalPresented: $isModalPresented, currentCollection: collection)) {

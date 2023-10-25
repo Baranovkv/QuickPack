@@ -13,20 +13,23 @@ struct CollectionView: View {
                 LazyVGrid(columns:
                             [GridItem(.flexible(), spacing: 20, alignment: .center),
                              GridItem(.flexible(), spacing: 20, alignment: .center)],
+                          spacing: 20,
                           content: {
-                    CollectionCard(collection: CollectionItem(name: "From Stratch", imageName: "emptylist", items: [String]()), isModalPresented: $isModalPresented)
+                    CollectionCard(collection: CollectionItem(name: "FROM SCRATCH", imageName: "emptylist", items: [String]()), isModalPresented: $isModalPresented);
                 })
                 
                 Section(header: Text("From Collections").font(.headline)) {
                     LazyVGrid(columns:
                                 [GridItem(.flexible(), spacing: 20, alignment: .center),
                                  GridItem(.flexible(), spacing: 20, alignment: .center)],
+                              spacing: 20,
                               content: {
                         ForEach (collectionList.collections) { collection in
                             CollectionCard(collection: collection, isModalPresented: $isModalPresented)
+                            
                         }
                     }
-                    )}
+                )}
             }
             .navigationTitle("Collect New Bag")
             .toolbar {
