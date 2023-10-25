@@ -32,12 +32,11 @@ struct CollectionCard: View {
                 .foregroundColor(collection.imageName == "emptylist" ? .black : .white)
                 .padding()
                 
-                if newBagName != "" {
-                    NavigationLink(destination: NewStuffView(currentCollection: collection)) {
+                NavigationLink(destination: NewStuffView(isModalPresented: $isModalPresented, currentCollection: collection)) {
                         EmptyView()
                     }
                 }
-            }
+            
             .clipShape(RoundedRectangle(cornerRadius: 20))
         }
 }
