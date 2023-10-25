@@ -1,52 +1,47 @@
-//
-//  CollectionView.swift
-//  QuickPack
-//
-//  Created by Kirill Baranov on 23/10/23.
-//
-
 import SwiftUI
 
 struct CollectionView: View {
     
     var collectionList = CollectionList.share
     @State var newBagName = ""
-
+    @Binding var isModalPresented: Bool
+    
     var body: some View {
         
-        NavigationStack{
-                    TextField("Enter New Bag Name", text: $newBagName)
-                        .font(.title)
-                        .multilineTextAlignment(.center)
-            
+        NavigationView {
             List {
-                    LazyVGrid(columns:
-                                [GridItem(.flexible(), spacing: 20, alignment: .center),
-                                 GridItem(.flexible(), spacing: 20, alignment: .center)],
-                              content: {
-                        CollectionCard(collection: CollectionItem(name: "FROM SCRATCH", imageName: "emptylist", items: [String]()), newBagName: newBagName)
-                    })
-                
+                LazyVGrid(columns:
+                            [GridItem(.flexible(), spacing: 20, alignment: .center),
+                             GridItem(.flexible(), spacing: 20, alignment: .center)],
+                          content: {
+                    CollectionCard(collection: CollectionItem(name: "From Stratch", imageName: "emptylist", items: [String]()), isModalPresented: $isModalPresented)
+                })
                 
                 Section(header: Text("From Collections").font(.headline)) {
-                    
                     LazyVGrid(columns:
                                 [GridItem(.flexible(), spacing: 20, alignment: .center),
                                  GridItem(.flexible(), spacing: 20, alignment: .center)],
                               content: {
-                        
                         ForEach (collectionList.collections) { collection in
-                            CollectionCard(collection: collection, newBagName: newBagName)
+                            CollectionCard(collection: collection, isModalPresented: $isModalPresented)
                         }
-                        
-                    })
+                    }
+                    )}
+            }
+            .navigationTitle("Collect New Bag")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Close") {
+                        isModalPresented = false
+                    }
                 }
             }
         }
     }
 }
 
-
-#Preview {
-    CollectionView()
+struct CollectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        CollectionView(isModalPresented: .constant(false)
+        )}
 }

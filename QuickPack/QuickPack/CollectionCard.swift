@@ -10,8 +10,7 @@ import SwiftUI
 struct CollectionCard: View {
     
     var collection: CollectionItem
-    var newBagName: String
-    
+    @Binding var isModalPresented: Bool
     var body: some View {
             ZStack(alignment: .bottomLeading) {
                 
@@ -34,7 +33,7 @@ struct CollectionCard: View {
                 .padding()
                 
                 if newBagName != "" {
-                    NavigationLink(destination: NewStuffView(currentCollection: collection, newBagName: newBagName)) {
+                    NavigationLink(destination: NewStuffView(currentCollection: collection)) {
                         EmptyView()
                     }
                 }
@@ -44,5 +43,5 @@ struct CollectionCard: View {
 }
 
 #Preview {
-    CollectionCard(collection: CollectionList.share.collections[0], newBagName: "New bag")
+    CollectionCard(collection: CollectionList.share.collections[0], isModalPresented: .constant(false))
 }

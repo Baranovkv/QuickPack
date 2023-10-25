@@ -20,15 +20,13 @@ struct LuggageView: View {
         
         NavigationStack{
             List{
-                TextField("Search", text: $searchText)
+              //  TextField("Search", text: $searchText)
                 
                 if stuff.isEmpty {
 //                    VStack(alignment: .leading, content: {
 //                        Text("Looks like you want to prepare a trip.")
                         HStack {
-                            Text("Let's create a new bag! Tap")
-                            Image(systemName: "plus").foregroundColor(.blue)
-                            Image(systemName: "arrow.up.right")
+                            Text("Let's create a new bag! Tap the plus button")
                         }
 //                    })
                 }
@@ -49,13 +47,14 @@ struct LuggageView: View {
                         
                     }
                     .sheet(isPresented: $isModalPresented) {
-                        CollectionView()
+                        CollectionView(isModalPresented: $isModalPresented)
                     }
                 }
                 //                    ToolbarItem(placement: .navigationBarTrailing) {
                 //                        EditButton()
                 //                    }
             }
+            .searchable(text: $searchText)
             .navigationTitle("Your Luggage")
         }
     }
