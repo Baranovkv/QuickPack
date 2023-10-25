@@ -19,18 +19,17 @@ struct LuggageView: View {
     var body: some View {
         
         NavigationStack{
-            List{
-              //  TextField("Search", text: $searchText)
-                
-                if stuff.isEmpty {
-//                    VStack(alignment: .leading, content: {
-//                        Text("Looks like you want to prepare a trip.")
-                        HStack {
-                            Text("Let's create a new bag! Tap the plus button")
-                        }
-//                    })
+            if stuff.isEmpty {
+                //                    VStack(alignment: .leading, content: {
+                //                        Text("Looks like you want to prepare a trip.")
+                HStack {
+                    Text("Let's create a new bag! Tap the plus button").bold().font(.largeTitle)
                 }
-                
+                //                    })
+            }
+            
+            List{
+                //  TextField("Search", text: $searchText)
                 ForEach(filteredStuff(searchText, stuff: stuff)) { stuff in
                     NavigationLink(stuff.name) {
                         StuffView(currentStuffName: stuff.name)
