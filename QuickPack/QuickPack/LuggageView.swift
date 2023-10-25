@@ -53,7 +53,7 @@ struct LuggageView: View {
                 //                        EditButton()
                 //                    }
             }
-            .searchable(text: $searchText)
+            .searchable(text: $searchText, prompt: "Find your bag")
             .navigationTitle("Your Luggage")
         }
     }
