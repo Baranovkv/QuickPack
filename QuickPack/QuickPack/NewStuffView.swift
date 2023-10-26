@@ -14,11 +14,19 @@ struct NewStuffView: View {
     @Binding var isModalPresented: Bool
     var currentCollection: CollectionItem // for pre-compiled list
     @State var newStuff = Stuff(name: "")
+    @State var bagName: String = ""
+    @State private var isValidInput = false
     
     var body: some View {
-        Text("Enter Bag Name")
-            .font(.title)
-            .padding()
+        VStack {
+            Text("Enter Bag Name")
+                .bold()
+                .font(.largeTitle)
+                .padding()
+                .position(x:200, y: 100)
+            
+            Image(systemName: "bag.badge.plus").resizable().scaledToFit().position(CGPoint(x: 45.0, y: -20.0)).frame(width: 100, height: 100)
+        }
         
         TextField("Bag Name", text: $newStuff.name)
             .padding(10)
@@ -26,16 +34,24 @@ struct NewStuffView: View {
             .cornerRadius(20) // Задаем радиус скругления углов
             .frame(maxWidth: 300)
             .padding()
+            .blur(radius: 0.0)
+            .position(x:200, y: -50)
+            .onChange(of: newStuff.name) { newValue in
+                isValidInput = !newValue.isEmpty
+            }
         
         Spacer()
         
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    
                     Button("Done"){
                         isModalPresented = false
                         addStuff()
                     }
+                    .disabled(!isValidInput)
                 }
+                
             }
     }
     
