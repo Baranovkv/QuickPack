@@ -27,7 +27,9 @@ struct NewStuffView: View {
             
             Image(systemName: "bag.badge.plus").resizable().scaledToFit().position(CGPoint(x: 45.0, y: -20.0)).frame(width: 100, height: 100)
         }
-        
+        //BE CAREFUL
+        //THE TITLE APPEARS LIKE THAT ONLY IN THE PREVIUW,
+        //LAUNCHING THE APPLICATION THE VIEW IS NORMAL
         TextField("Bag Name", text: $newStuff.name)
             .padding(10)
             .background(Color.gray.opacity(0.2))
