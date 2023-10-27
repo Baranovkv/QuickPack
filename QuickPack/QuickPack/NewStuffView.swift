@@ -14,7 +14,6 @@ struct NewStuffView: View {
     @Binding var isModalPresented: Bool
     var currentCollection: CollectionItem // for pre-compiled list
     @State var newStuff = Stuff(name: "")
-    @State private var isValidInput = false
     
     var body: some View {
         NavigationStack {
@@ -28,13 +27,6 @@ struct NewStuffView: View {
                 Image(systemName: "bag.badge.plus").resizable().scaledToFit().position(CGPoint(x: 45.0, y: -20.0)).frame(width: 100, height: 100)
             }
             
-            // the next lines should be the right use for .nagigation destination but
-            // the compiler keep give error don't know why
-            // .navigationDestination(for: newStuff.self) { name in
-            //  StuffView(currentStuffName: name)}
-            //BE CAREFUL
-            //THE TITLE APPEARS LIKE THAT ONLY IN THE PREVIUW,
-            //LAUNCHING THE APPLICATION THE VIEW IS NORMAL
             TextField("Bag Name", text: $newStuff.name)
                 .padding(10)
                 .background(Color.gray.opacity(0.2))
@@ -43,9 +35,6 @@ struct NewStuffView: View {
                 .padding()
                 .blur(radius: 0.0)
                 .position(x:200, y: -40)
-                .onChange(of: newStuff.name) { newValue in
-                    isValidInput = !newValue.isEmpty
-                }
             
             Spacer()
             
@@ -56,11 +45,10 @@ struct NewStuffView: View {
                             isModalPresented = false
                             addStuff()
                         }
-                        .disabled(!isValidInput)
+                        .disabled(newStuff.name == "")
                     }
                     
                 }
-                
         }
     }
     

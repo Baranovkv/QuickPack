@@ -24,7 +24,6 @@ struct LuggageView: View {
             }
             
             List{
-                //  TextField("Search", text: $searchText)
                 ForEach(filteredStuff(searchText, stuff: stuff)) { stuff in
                     NavigationLink(stuff.name) {
                         StuffView(currentStuffName: stuff.name)
@@ -42,11 +41,12 @@ struct LuggageView: View {
                         
                     }
                 }
-                //                    ToolbarItem(placement: .navigationBarTrailing) {
-                //                        EditButton()
-                //                    }
+                
             }
             .searchable(text: $searchText, prompt: "Find your bag")
+            .sheet(isPresented: $isModalPresented) {
+                CollectionView(isModalPresented: $isModalPresented)
+            }
             .navigationBarTitle("Your Luggage", displayMode: .automatic)
         }
     }
