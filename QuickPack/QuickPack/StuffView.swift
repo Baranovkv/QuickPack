@@ -49,7 +49,7 @@ struct StuffView: View {
                     EditButton()
                 }
             }
-            .navigationTitle(currentStuffName)
+            .navigationBarTitle(currentStuffName, displayMode: .automatic)
 
         }
     }

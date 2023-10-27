@@ -20,9 +20,7 @@ struct LuggageView: View {
         
         NavigationStack{
             if stuff.isEmpty {
-                HStack {
-                    Text("Let's create a new bag! Tap the plus button").bold().font(.largeTitle)
-                }
+                Text("Let's create a new bag! Tap the plus button").bold().font(.largeTitle).position(x:200, y:200)
             }
             
             List{
@@ -49,11 +47,7 @@ struct LuggageView: View {
                 //                    }
             }
             .searchable(text: $searchText, prompt: "Find your bag")
-            .sheet(isPresented: $isModalPresented) {
-                CollectionView(isModalPresented: $isModalPresented)
-            }
-            .navigationTitle("Your Luggage")
-            
+            .navigationBarTitle("Your Luggage", displayMode: .automatic)
         }
     }
     
