@@ -11,26 +11,19 @@ import SwiftData
 struct LuggageView: View {
     
     @Environment(\.modelContext) private var modelContext
-    //    @Query private var items: [Item]
     @Query private var stuff: [Stuff]
     @State private var isModalPresented = false
-    @State private var searchText = ""
     
     var body: some View {
         
         NavigationStack{
-            if stuff.isEmpty {
-                Text("Let's create a new bag! Tap the plus button").bold().font(.largeTitle).position(x:200, y:200)
-            }
             
-            List{
-                ForEach(filteredStuff(searchText, stuff: stuff)) { stuff in
-                    NavigationLink(stuff.name) {
-                        StuffView(currentStuffName: stuff.name)
-                    }
+            VStack {
+                if stuff.isEmpty {
+                    EmptyLuggageView()
+                } else {
+                    LuggageWithStuffView()
                 }
-                .onDelete(perform: deleteItems)
-                
             }
             .toolbar {
                 ToolbarItem {
@@ -43,29 +36,10 @@ struct LuggageView: View {
                 }
                 
             }
-            .searchable(text: $searchText, prompt: "Find your bag")
             .sheet(isPresented: $isModalPresented) {
                 CollectionView(isModalPresented: $isModalPresented)
             }
             .navigationBarTitle("Your Luggage", displayMode: .automatic)
-        }
-    }
-    
-    func filteredStuff(_ searchText: String, stuff: [Stuff]) -> [Stuff] {
-        
-        if searchText.isEmpty {
-            return stuff
-        } else {
-            return stuff.filter { $0.name.lowercased().contains(searchText.lowercased())
-            }
-        }
-    }
-    
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(stuff[index])
-            }
         }
     }
 }

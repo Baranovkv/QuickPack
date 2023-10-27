@@ -13,6 +13,15 @@ final class Stuff {
     @Attribute(.unique) var name: String
     var items: [Item]
     
+    var inProgress: Bool {
+        for item in items {
+            if item.isChecked == false {
+                return false
+            }
+        }
+        return true
+    }
+    
     init(name: String = "New Bag", items: [Item] = [Item]()) {
         self.name = name
         self.items = items

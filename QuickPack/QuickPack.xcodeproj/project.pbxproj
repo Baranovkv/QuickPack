@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE1BB8C12AEC05DB009AF81D /* EmptyLuggageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BB8C02AEC05DB009AF81D /* EmptyLuggageView.swift */; };
+		DE1BB8C32AEC062C009AF81D /* LuggageWithStuffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BB8C22AEC062C009AF81D /* LuggageWithStuffView.swift */; };
 		DEA8BAD92AE6C70F0042502D /* QuickPackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8BAD82AE6C70F0042502D /* QuickPackApp.swift */; };
 		DEA8BADD2AE6C70F0042502D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8BADC2AE6C70F0042502D /* Item.swift */; };
 		DEA8BADF2AE6C7110042502D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEA8BADE2AE6C7110042502D /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE1BB8C02AEC05DB009AF81D /* EmptyLuggageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyLuggageView.swift; sourceTree = "<group>"; };
+		DE1BB8C22AEC062C009AF81D /* LuggageWithStuffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuggageWithStuffView.swift; sourceTree = "<group>"; };
 		DEA8BAD52AE6C70F0042502D /* QuickPack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickPack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEA8BAD82AE6C70F0042502D /* QuickPackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPackApp.swift; sourceTree = "<group>"; };
 		DEA8BADC2AE6C70F0042502D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				DEA8BAE82AE6C7620042502D /* LuggageView.swift */,
+				DE1BB8C02AEC05DB009AF81D /* EmptyLuggageView.swift */,
+				DE1BB8C22AEC062C009AF81D /* LuggageWithStuffView.swift */,
 				DEA8BAF22AE6C81B0042502D /* StuffView.swift */,
 				DEA8BAF62AE6C8520042502D /* NewStuffView.swift */,
 				DEA8BAF82AE6C86B0042502D /* CollectionView.swift */,
@@ -181,8 +187,10 @@
 				DEA8BAEE2AE6C7B20042502D /* CollectionItem.swift in Sources */,
 				DEA8BADD2AE6C70F0042502D /* Item.swift in Sources */,
 				DEA8BAD92AE6C70F0042502D /* QuickPackApp.swift in Sources */,
+				DE1BB8C32AEC062C009AF81D /* LuggageWithStuffView.swift in Sources */,
 				DEA8BAF72AE6C8520042502D /* NewStuffView.swift in Sources */,
 				DEA8BAF32AE6C81B0042502D /* StuffView.swift in Sources */,
+				DE1BB8C12AEC05DB009AF81D /* EmptyLuggageView.swift in Sources */,
 				DEA8BAF92AE6C86B0042502D /* CollectionView.swift in Sources */,
 				DEA8BAFB2AE6C88A0042502D /* CollectionCard.swift in Sources */,
 				DEA8BAE92AE6C7620042502D /* LuggageView.swift in Sources */,

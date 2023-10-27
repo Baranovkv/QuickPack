@@ -10,7 +10,7 @@ struct CollectionView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, content: {
+            ScrollView(content: {
                 Section(header: Text("").font(.title3)) {
                     LazyVGrid(columns:
                                 [GridItem(.flexible()), GridItem(.flexible())],
