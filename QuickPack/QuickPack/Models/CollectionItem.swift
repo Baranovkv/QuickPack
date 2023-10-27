@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CollectionItem:Identifiable {
+struct CollectionItem:Identifiable, Hashable {
     var name: String
     var id: String
     var imageName: String

@@ -1,3 +1,5 @@
+
+
 import SwiftUI
 
 struct CollectionView: View {
@@ -7,45 +9,50 @@ struct CollectionView: View {
     @Binding var isModalPresented: Bool
     
     var body: some View {
-        NavigationView{
-            
-            VStack {
-                
-                List {
-                    
+        NavigationStack {
+            VStack(alignment: .leading, content: {
+                Section(header: Text("").font(.title3)) {
                     LazyVGrid(columns:
-                                [GridItem(.flexible(), spacing: 20, alignment: .center),
-                                 GridItem(.flexible(), spacing: 20, alignment: .center)],
+                                [GridItem(.flexible()), GridItem(.flexible())],
                               spacing: 20,
                               content: {
                         
-                        CollectionCard(collection: CollectionItem(name: "FROM SCRATCH", imageName: "emptylist", items: [String]()), isModalPresented: $isModalPresented);
-                    })
-                    
-                    
-                    Section(header: Text("From Collections").font(.title3)) {
-                        LazyVGrid(columns:
-                                    [GridItem(.flexible(), spacing: 20, alignment: .center),
-                                     GridItem(.flexible(), spacing: 20, alignment: .center)],
-                                  spacing: 20,
-                                  content: {
-                            
-                            ForEach (collectionList.collections) { collection in
-                                
-                                CollectionCard(collection: collection, isModalPresented: $isModalPresented)
-                            }
-                        })
-                    }
-                }
-                .navigationTitle("Collect New Bag")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button("Close") {
-                            isModalPresented = false
+                        NavigationLink(destination: NewStuffView(isModalPresented: $isModalPresented, currentCollection: CollectionItem(name: "FROM SCRATCH", imageName: "emptylist", items: [String]()))) {
+                            CollectionCard(collection: CollectionItem(name: "FROM SCRATCH", imageName: "emptylist", items: [String]()));
                         }
+                        
+                    })
+                }
+                
+                
+                Section(header: Text("From Collections")
+                    .font(.title2)) {
+                        
+                    LazyVGrid(columns:
+                                [GridItem(.flexible(), spacing: 20), GridItem(.flexible())],
+                              spacing: 20,
+                              content: {
+                        
+                        ForEach (collectionList.collections) { collection in
+                            
+                            NavigationLink(destination: NewStuffView(isModalPresented: $isModalPresented, currentCollection: collection)) {
+                                CollectionCard(collection: collection)
+                            }
+                        }
+                    })
+                }
+            })
+
+            .padding()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Close") {
+                        isModalPresented = false
                     }
+                    .foregroundStyle(Color(.red))
                 }
             }
+            .navigationTitle("Collect New Bag")
         }
     }
 }

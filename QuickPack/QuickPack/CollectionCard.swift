@@ -10,12 +10,9 @@ import SwiftUI
 struct CollectionCard: View {
     
     var collection: CollectionItem
-    @Binding var isModalPresented: Bool
+
     var body: some View {
         ZStack(alignment: .leading) {
-            NavigationLink(destination: NewStuffView(isModalPresented: $isModalPresented, currentCollection: collection)) {
-                EmptyView()
-            }
             
             Image(collection.imageName)
                 .resizable()
@@ -25,10 +22,11 @@ struct CollectionCard: View {
             //
             //            LinearGradient(colors: [.clear, .black.opacity(0.8)], startPoint: .top, endPoint: .bottom)
             
-            VStack(alignment: .center) {
+            VStack(alignment: .leading) {
                 Text(collection.name)
                     .font(.title2)
                     .bold()
+                    .multilineTextAlignment(.leading)
                 
             }
             //                .foregroundColor(collection.imageName == "emptylist" ? .black : .white)
@@ -43,5 +41,5 @@ struct CollectionCard: View {
 }
 
 #Preview {
-    CollectionCard(collection: CollectionList.share.collections[0], isModalPresented: .constant(false))
+    CollectionCard(collection: CollectionList.share.collections[0])
 }

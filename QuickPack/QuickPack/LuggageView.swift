@@ -20,12 +20,9 @@ struct LuggageView: View {
         
         NavigationStack{
             if stuff.isEmpty {
-                //                    VStack(alignment: .leading, content: {
-                //                        Text("Looks like you want to prepare a trip.")
                 HStack {
                     Text("Let's create a new bag! Tap the plus button").bold().font(.largeTitle)
                 }
-                //                    })
             }
             
             List{
@@ -36,6 +33,7 @@ struct LuggageView: View {
                     }
                 }
                 .onDelete(perform: deleteItems)
+                
             }
             .toolbar {
                 ToolbarItem {
@@ -45,16 +43,17 @@ struct LuggageView: View {
                         Text(Image(systemName: "plus"))
                         
                     }
-                    .sheet(isPresented: $isModalPresented) {
-                        CollectionView(isModalPresented: $isModalPresented)
-                    }
                 }
                 //                    ToolbarItem(placement: .navigationBarTrailing) {
                 //                        EditButton()
                 //                    }
             }
             .searchable(text: $searchText, prompt: "Find your bag")
+            .sheet(isPresented: $isModalPresented) {
+                CollectionView(isModalPresented: $isModalPresented)
+            }
             .navigationTitle("Your Luggage")
+            
         }
     }
     

@@ -33,6 +33,9 @@ struct NewStuffView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done"){
                         isModalPresented = false
+//                        ForEach (currentCollection.items, id: \.self) { item in
+//                            Rectangle()
+//                        }
                         addStuff()
                     }
                 }
@@ -44,8 +47,13 @@ struct NewStuffView: View {
         withAnimation {
             let newStuff = newStuff
             modelContext.insert(newStuff)
+            for collectionItem in currentCollection.items {
+                let newItem = Item(name: collectionItem, stuff: newStuff)
+                modelContext.insert(newItem)
+            }
         }
     }
+    
 }
 
 #Preview {
