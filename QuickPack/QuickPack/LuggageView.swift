@@ -20,12 +20,7 @@ struct LuggageView: View {
         
         NavigationStack{
             if stuff.isEmpty {
-                //                    VStack(alignment: .leading, content: {
-                //                        Text("Looks like you want to prepare a trip.")
-                HStack {
-                    Text("Let's create a new bag! Tap the plus button").bold().font(.largeTitle)
-                }
-                //                    })
+                Text("Let's create a new bag! Tap the plus button").bold().font(.largeTitle).position(x:200, y:200)
             }
             
             List{
@@ -54,7 +49,7 @@ struct LuggageView: View {
                 //                    }
             }
             .searchable(text: $searchText, prompt: "Find your bag")
-            .navigationTitle("Your Luggage")
+            .navigationBarTitle("Your Luggage", displayMode: .automatic)
         }
     }
     
