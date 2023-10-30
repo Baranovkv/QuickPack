@@ -11,23 +11,52 @@ import SwiftData
 struct LuggageWithStuffView: View {
     
     @Environment(\.modelContext) private var modelContext
-    @Query private var stuff: [Stuff]
+    @Query var stuff: [Stuff]
     @State private var isModalPresented = false
     @State private var searchText = ""
     
     var body: some View {
-            
-            List{
-                                
-                ForEach(filteredStuff(searchText, stuff: stuff)) { stuff in
-                    NavigationLink(stuff.name) {
-                        StuffView(currentStuffName: stuff.name)
+        
+        List{
+            if !stuff.filter({$0.inProgress == true}).isEmpty {
+                
+                Section(header: Text("In Progress").font(.title2)) {
+                    
+                    ForEach(filteredStuff(searchText, stuff: stuff.filter{$0.inProgress == true})) { stuff in
+                        HStack {
+                            Image(systemName: "bag")
+                            NavigationLink(stuff.name) {
+                                StuffView(currentStuffName: stuff.name)
+                            }
+                        }
+                        .swipeActions {
+                            Button("Delete", role: .destructive) {
+                                deleteStuff(stuff: stuff)
+                            }
+                        }
                     }
                 }
-                .onDelete(perform: deleteItems)
-                
             }
-            .searchable(text: $searchText, prompt: "Find your bag")
+            
+            if !stuff.filter({$0.inProgress == false}).isEmpty {
+                Section(header: Text("Completed").font(.title2)) {
+                    ForEach(filteredStuff(searchText, stuff: stuff.filter{$0.inProgress == false})) { stuff in
+                        HStack {
+                            Image(systemName: "bag.fill")
+                            NavigationLink(stuff.name) {
+                                StuffView(currentStuffName: stuff.name)
+                            }
+                        }
+                        .swipeActions {
+                            Button("Delete", role: .destructive) {
+                                deleteStuff(stuff: stuff)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .searchable(text: $searchText, prompt: "Find your bag")
     }
     
     func filteredStuff(_ searchText: String, stuff: [Stuff]) -> [Stuff] {
@@ -40,12 +69,8 @@ struct LuggageWithStuffView: View {
         }
     }
     
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(stuff[index])
-            }
-        }
+    private func deleteStuff(stuff: Stuff) {
+        modelContext.delete(stuff)
     }
 }
 

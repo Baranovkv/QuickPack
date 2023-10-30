@@ -14,12 +14,16 @@ final class Stuff {
     var items: [Item]
     
     var inProgress: Bool {
-        for item in items {
-            if item.isChecked == false {
-                return false
+        if items.isEmpty {
+            return true
+        } else {
+            for item in items {
+                if item.isChecked == false {
+                    return true
+                }
             }
+            return false
         }
-        return true
     }
     
     init(name: String = "New Bag", items: [Item] = [Item]()) {

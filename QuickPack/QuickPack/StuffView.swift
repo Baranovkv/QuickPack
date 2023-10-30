@@ -12,16 +12,48 @@ struct StuffView: View {
     
     @Environment(\.modelContext) private var modelContext
     var currentStuffName: String
-    @Query private var items: [Item]
-    @State private var newItem: String = ""
+    @Query(sort: \Item.name, order: .forward)
+    var items: [Item]
+    @State private var newItem = ""
+    @State private var newName = ""
+    @State private var isEditing = false
+    @State private var editingStuffName = ""
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(items) { item in
-                    if item.stuff?.name == currentStuffName {
-                        HStack {
+                    HStack {
+                        
+                        //                        if isEditing && item.name == editingStuffName {
+                        //                        } else {
+                        //                        }
+                        
+                        
+                        if isEditing && item.name == editingStuffName {
+                            TextField(item.name, text: $newName)
+                            Spacer()
+                            Button {
+                                if !newName.isEmpty {
+                                    item.name = newName
+                                    isEditing = false
+                                    editingStuffName = ""
+                                    newName = ""
+                                    
+                                } else {
+                                    isEditing = false
+                                    editingStuffName = ""
+                                    newName = ""
+                                }
+                            } label: {
+                                Text("Save")
+                            }
+                        } else {
                             Text(item.name)
+                                .onTapGesture {
+                                    isEditing = true
+                                    editingStuffName = item.name
+                                }
                             Spacer()
                             Button {
                                 item.isChecked.toggle()
@@ -44,15 +76,32 @@ struct StuffView: View {
                     })
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-            }
+            //            .toolbar {
+            //                ToolbarItem(placement: .navigationBarTrailing) {
+            //                    if isEditing {
+            //                        Button("Done") {
+            //                            isEditing = false
+            //                            newName = ""
+            //                        }
+            //                    } else {
+            //                        Button("Edit") {
+            //                            isEditing = true
+            //                        }
+            //                    }
+            //                }
+            //            }
             .navigationBarTitle(currentStuffName, displayMode: .automatic)
-
+            
         }
     }
+    
+    init(currentStuffName: String) {
+        self._items = Query(filter: #Predicate{
+            $0.stuff?.name == currentStuffName}, sort: \.name)
+        
+        self.currentStuffName = currentStuffName
+    }
+    
     
     private func addItem() {
         withAnimation {
@@ -68,6 +117,9 @@ struct StuffView: View {
             }
         }
     }
+    
+    
+    
 }
 
 #Preview {

@@ -52,6 +52,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE1BB8C42AEC0C74009AF81D /* Luggage */ = {
+			isa = PBXGroup;
+			children = (
+				DEA8BAE82AE6C7620042502D /* LuggageView.swift */,
+				DE1BB8C02AEC05DB009AF81D /* EmptyLuggageView.swift */,
+				DE1BB8C22AEC062C009AF81D /* LuggageWithStuffView.swift */,
+			);
+			name = Luggage;
+			sourceTree = "<group>";
+		};
+		DE1BB8C52AEC0C93009AF81D /* NewStuff */ = {
+			isa = PBXGroup;
+			children = (
+				DEA8BAF82AE6C86B0042502D /* CollectionView.swift */,
+				DEA8BAFA2AE6C88A0042502D /* CollectionCard.swift */,
+				DEA8BAF62AE6C8520042502D /* NewStuffView.swift */,
+			);
+			name = NewStuff;
+			sourceTree = "<group>";
+		};
 		DEA8BACC2AE6C70F0042502D = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +93,7 @@
 			children = (
 				DEA8BAD82AE6C70F0042502D /* QuickPackApp.swift */,
 				DEA8BAF12AE6C8060042502D /* Views */,
+				DEA8BAF22AE6C81B0042502D /* StuffView.swift */,
 				DEA8BAEA2AE6C7840042502D /* Models */,
 				DEA8BADE2AE6C7110042502D /* Assets.xcassets */,
 				DEA8BAE02AE6C7110042502D /* Preview Content */,
@@ -102,13 +123,8 @@
 		DEA8BAF12AE6C8060042502D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DEA8BAE82AE6C7620042502D /* LuggageView.swift */,
-				DE1BB8C02AEC05DB009AF81D /* EmptyLuggageView.swift */,
-				DE1BB8C22AEC062C009AF81D /* LuggageWithStuffView.swift */,
-				DEA8BAF22AE6C81B0042502D /* StuffView.swift */,
-				DEA8BAF62AE6C8520042502D /* NewStuffView.swift */,
-				DEA8BAF82AE6C86B0042502D /* CollectionView.swift */,
-				DEA8BAFA2AE6C88A0042502D /* CollectionCard.swift */,
+				DE1BB8C42AEC0C74009AF81D /* Luggage */,
+				DE1BB8C52AEC0C93009AF81D /* NewStuff */,
 			);
 			name = Views;
 			sourceTree = "<group>";

@@ -25,8 +25,7 @@ struct CollectionView: View {
                 }
                 
                 
-                Section(header: Text("From Collections")
-                    .font(.title2)) {
+                Section(header: Text("From Collections").font(.title2)) {
                         
                     LazyVGrid(columns:
                                 [GridItem(.flexible(), spacing: 20), GridItem(.flexible())],

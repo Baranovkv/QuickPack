@@ -30,7 +30,7 @@ struct NewStuffView: View {
             TextField("Bag Name", text: $newStuff.name)
                 .padding(10)
                 .background(Color.gray.opacity(0.2))
-                .cornerRadius(20) // Задаем радиус скругления углов
+                .cornerRadius(20)
                 .frame(maxWidth: 300)
                 .padding()
                 .blur(radius: 0.0)
@@ -47,7 +47,6 @@ struct NewStuffView: View {
                         }
                         .disabled(newStuff.name == "")
                     }
-                    
                 }
         }
     }

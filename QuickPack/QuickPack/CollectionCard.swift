@@ -19,20 +19,15 @@ struct CollectionCard: View {
                 .aspectRatio(contentMode: .fit)
                 .clipped()
             
-            //
-            //            LinearGradient(colors: [.clear, .black.opacity(0.8)], startPoint: .top, endPoint: .bottom)
-            
             VStack(alignment: .leading) {
                 Text(collection.name)
                     .font(.title2)
                     .bold()
                     .multilineTextAlignment(.leading)
-                
             }
-            //                .foregroundColor(collection.imageName == "emptylist" ? .black : .white)
+            
             .foregroundColor(.white)
             .padding()
-            
             
         }
         
