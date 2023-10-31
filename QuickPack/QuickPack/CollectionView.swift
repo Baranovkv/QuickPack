@@ -10,38 +10,53 @@ struct CollectionView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView(content: {
-                Section(header: Text("").font(.title3)) {
-                    LazyVGrid(columns:
-                                [GridItem(.flexible()), GridItem(.flexible())],
-                              spacing: 20,
-                              content: {
-                        
-                        NavigationLink(destination: NewStuffView(isModalPresented: $isModalPresented, currentCollection: CollectionItem(name: "FROM SCRATCH", imageName: "emptylist", items: [String]()))) {
-                            CollectionCard(collection: CollectionItem(name: "FROM SCRATCH", imageName: "emptylist", items: [String]()));
-                        }
-                        
-                    })
-                }
-                
-                
-                Section(header: Text("From Collections").font(.title2)) {
-                        
+            ScrollView {
+                VStack(alignment: .leading) {
                     LazyVGrid(columns:
                                 [GridItem(.flexible(), spacing: 20), GridItem(.flexible())],
                               spacing: 20,
                               content: {
-                        
-                        ForEach (collectionList.collections) { collection in
-                            
-                            NavigationLink(destination: NewStuffView(isModalPresented: $isModalPresented, currentCollection: collection)) {
-                                CollectionCard(collection: collection)
-                            }
+                        NavigationLink(destination:
+                                        NewStuffView(
+                                            isModalPresented: $isModalPresented,
+                                            currentCollection: CollectionItem(
+                                                name: "FROM SCRATCH",
+                                                imageName: "emptylist",
+                                                items: [String]()
+                                            )
+                                        )
+                        ) {
+                            CollectionCard(collection:
+                                            CollectionItem(
+                                                name: "FROM SCRATCH",
+                                                imageName: "emptylist",
+                                                items: [String]()
+                                            )
+                            )
                         }
                     })
+                    
+                    Section(header: Text("From Collections")
+                        .font(.title2)
+                    ) {
+                        LazyVGrid(columns:
+                                    [GridItem(.flexible(), spacing: 20), GridItem(.flexible())],
+                                  spacing: 20,
+                                  content: {
+                            ForEach (collectionList.collections) { collection in
+                                NavigationLink(destination:
+                                                NewStuffView(
+                                                    isModalPresented: $isModalPresented,
+                                                    currentCollection: collection)
+                                ) {
+                                    CollectionCard(collection: collection)
+                                }
+                            }
+                        })
+                    }
                 }
-            })
-
+            }
+            
             .padding()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -51,7 +66,7 @@ struct CollectionView: View {
                     .foregroundStyle(Color(.red))
                 }
             }
-            .navigationTitle("Collect New Bag")
+            .navigationTitle("Create a new bag")
         }
     }
 }
