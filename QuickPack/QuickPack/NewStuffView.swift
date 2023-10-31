@@ -22,19 +22,23 @@ struct NewStuffView: View {
                     .bold()
                     .font(.largeTitle)
                     .padding()
-                    .position(x:200, y: 100)
                 
-                Image(systemName: "bag.badge.plus").resizable().scaledToFit().position(CGPoint(x: 45.0, y: -20.0)).frame(width: 100, height: 100)
+                Image(systemName: "bag.badge.plus")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100)
+                    .offset(x: -14)
+                
+                TextField("Bag Name", text: $newStuff.name)
+                    .padding(10)
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(20)
+                    .frame(maxWidth: 300)
+                    .padding()
+                    .blur(radius: 0.0)
             }
             
-            TextField("Bag Name", text: $newStuff.name)
-                .padding(10)
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(20)
-                .frame(maxWidth: 300)
-                .padding()
-                .blur(radius: 0.0)
-                .position(x:200, y: -40)
+            
             
             Spacer()
             
@@ -48,6 +52,7 @@ struct NewStuffView: View {
                         .disabled(newStuff.name == "")
                     }
                 }
+//                .navigationTitle("Enter Bag Name")
         }
     }
     
