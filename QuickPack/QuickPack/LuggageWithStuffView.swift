@@ -20,7 +20,10 @@ struct LuggageWithStuffView: View {
         List{
             if !stuff.filter({$0.inProgress == true}).isEmpty {
                 
-                Section(header: Text("In Progress").font(.title2)) {
+                Section(header: Text("Actual")
+                    .font(.headline)
+                    .textCase(nil)
+                ) {
                     
                     ForEach(filteredStuff(searchText, stuff: stuff.filter{$0.inProgress == true})) { stuff in
                         HStack {
@@ -39,7 +42,10 @@ struct LuggageWithStuffView: View {
             }
             
             if !stuff.filter({$0.inProgress == false}).isEmpty {
-                Section(header: Text("Completed").font(.title2)) {
+                Section(header: Text("Completed")
+                    .font(.headline)
+                    .textCase(nil)
+                ) {
                     ForEach(filteredStuff(searchText, stuff: stuff.filter{$0.inProgress == false})) { stuff in
                         HStack {
                             Image(systemName: "bag.fill")

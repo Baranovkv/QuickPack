@@ -20,8 +20,8 @@ struct CollectionCard: View {
                 .clipped()
             
             VStack(alignment: .leading) {
-                Text(collection.name)
-                    .font(.title2)
+                Text(collection.name.capitalized)
+                    .font(.title)
                     .bold()
                     .multilineTextAlignment(.leading)
             }
