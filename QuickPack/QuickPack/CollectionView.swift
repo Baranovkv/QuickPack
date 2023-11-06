@@ -19,20 +19,11 @@ struct CollectionView: View {
                         NavigationLink(destination:
                                         NewStuffView(
                                             isModalPresented: $isModalPresented,
-                                            currentCollection: CollectionItem(
-                                                name: "FROM SCRATCH",
-                                                imageName: "emptylist",
-                                                items: [String]()
-                                            )
+                                            collectionName: CollectionItem.emptyStuff.name,
+                                            collectionItems: CollectionItem.emptyStuff.items
                                         )
                         ) {
-                            CollectionCard(collection:
-                                            CollectionItem(
-                                                name: "FROM SCRATCH",
-                                                imageName: "emptylist",
-                                                items: [String]()
-                                            )
-                            )
+                            CollectionCard(collection: CollectionItem.emptyStuff)
                         }
                     })
                     
@@ -47,7 +38,8 @@ struct CollectionView: View {
                                 NavigationLink(destination:
                                                 NewStuffView(
                                                     isModalPresented: $isModalPresented,
-                                                    currentCollection: collection)
+                                                    collectionName: collection.name,
+                                                    collectionItems: collection.items)
                                 ) {
                                     CollectionCard(collection: collection)
                                 }

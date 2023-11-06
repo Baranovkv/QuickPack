@@ -19,4 +19,10 @@ struct CollectionItem:Identifiable, Hashable {
         self.imageName = imageName
         self.items = items
     }
+    
+    static let emptyStuff = CollectionItem(
+        name: "FROM SCRATCH",
+        imageName: "emptylist",
+        items: [String]()
+    )
 }

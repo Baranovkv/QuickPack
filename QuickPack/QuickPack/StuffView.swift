@@ -24,12 +24,11 @@ struct StuffView: View {
             List {
                 ForEach(items) { item in
                     HStack {
-                        
-                        //                        if isEditing && item.name == editingStuffName {
-                        //                        } else {
-                        //                        }
-                        
-                        
+                        Button {
+                            item.isChecked.toggle()
+                        } label: {
+                            Image(systemName: item.isChecked ? "checkmark.circle.fill" : "circle")
+                        }
                         if isEditing && item.name == editingStuffName {
                             TextField(item.name, text: $newName)
                             Spacer()
@@ -49,17 +48,12 @@ struct StuffView: View {
                                 Text("Save")
                             }
                         } else {
+
                             Text(item.name)
                                 .onTapGesture {
                                     isEditing = true
                                     editingStuffName = item.name
                                 }
-                            Spacer()
-                            Button {
-                                item.isChecked.toggle()
-                            } label: {
-                                Image(systemName: item.isChecked ? "checkmark.square" : "square")
-                            }
                         }
                     }
                 }
@@ -76,20 +70,6 @@ struct StuffView: View {
                     })
                 }
             }
-            //            .toolbar {
-            //                ToolbarItem(placement: .navigationBarTrailing) {
-            //                    if isEditing {
-            //                        Button("Done") {
-            //                            isEditing = false
-            //                            newName = ""
-            //                        }
-            //                    } else {
-            //                        Button("Edit") {
-            //                            isEditing = true
-            //                        }
-            //                    }
-            //                }
-            //            }
             .navigationBarTitle(currentStuffName, displayMode: .automatic)
             
         }
@@ -117,8 +97,6 @@ struct StuffView: View {
             }
         }
     }
-    
-    
     
 }
 
