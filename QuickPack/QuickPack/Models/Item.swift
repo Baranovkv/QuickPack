@@ -14,9 +14,12 @@ final class Item {
     var isChecked: Bool
     var stuff: Stuff?
     
+    var orderIndex: Int = 0
+    
     init(name: String, isChecked: Bool = false, stuff: Stuff) {
         self.name = name
         self.isChecked = isChecked
         self.stuff = stuff
+//        self.orderIndex = orderIndex
     }
 }

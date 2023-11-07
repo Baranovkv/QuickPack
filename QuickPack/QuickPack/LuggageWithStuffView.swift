@@ -29,7 +29,7 @@ struct LuggageWithStuffView: View {
                         HStack {
                             Image(systemName: "bag")
                             NavigationLink(stuff.name) {
-                                StuffView(currentStuffName: stuff.name)
+                                StuffView(currentStuffName: stuff.name, currentIndex: stuff.items.count)
                             }
                         }
                         .swipeActions {
@@ -50,7 +50,7 @@ struct LuggageWithStuffView: View {
                         HStack {
                             Image(systemName: "bag.fill")
                             NavigationLink(stuff.name) {
-                                StuffView(currentStuffName: stuff.name)
+                                StuffView(currentStuffName: stuff.name, currentIndex: stuff.items.count)
                             }
                         }
                         .swipeActions {

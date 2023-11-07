@@ -12,8 +12,11 @@ struct StuffView: View {
     
     @Environment(\.modelContext) private var modelContext
     var currentStuffName: String
+    var currentIndex: Int
+    
     @Query(sort: \Item.name, order: .forward)
     var items: [Item]
+    
     @State private var newItem = ""
     @State private var newName = ""
     @State private var isEditing = false
@@ -24,6 +27,7 @@ struct StuffView: View {
             List {
                 ForEach(items) { item in
                     HStack {
+//                        Text("\(item.orderIndex) - ") // for checking .onMove
                         Button {
                             item.isChecked.toggle()
                         } label: {
@@ -58,6 +62,8 @@ struct StuffView: View {
                     }
                 }
                 .onDelete(perform: deleteItems)
+                .onMove(perform: moveItems)
+                
                 HStack{
                     TextField("Add Item...", text: $newItem)
                     Button(action: {
@@ -71,21 +77,21 @@ struct StuffView: View {
                 }
             }
             .navigationBarTitle(currentStuffName, displayMode: .automatic)
-            
         }
     }
     
-    init(currentStuffName: String) {
+    init(currentStuffName: String, currentIndex: Int) {
         self._items = Query(filter: #Predicate{
-            $0.stuff?.name == currentStuffName}, sort: \.name)
+            $0.stuff?.name == currentStuffName}, sort: \.orderIndex)
         
         self.currentStuffName = currentStuffName
+        self.currentIndex = currentIndex
     }
-    
     
     private func addItem() {
         withAnimation {
             let newItem = Item(name: newItem, stuff: Stuff(name: currentStuffName))
+            newItem.orderIndex = currentIndex
             modelContext.insert(newItem)
         }
     }
@@ -94,13 +100,28 @@ struct StuffView: View {
         withAnimation {
             for index in offsets {
                 modelContext.delete(items[index])
+                
+                for newIndex in index..<items.endIndex {
+                    items[newIndex].orderIndex -= 1
+                }
             }
         }
+    }
+    
+    private func moveItems(source: IndexSet, destination: Int) {
+         
+            var updatedItems = items
+
+            updatedItems.move(fromOffsets: source, toOffset: destination)
+            
+            for (index, item) in updatedItems.enumerated() {
+                item.orderIndex = index
+            }
     }
     
 }
 
 #Preview {
-    StuffView(currentStuffName: "Stuff View")
+    StuffView(currentStuffName: "Stuff View", currentIndex: 0)
         .modelContainer(for: Item.self, inMemory: true)
 }

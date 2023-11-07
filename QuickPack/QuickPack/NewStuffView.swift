@@ -16,6 +16,7 @@ struct NewStuffView: View {
     @State var collectionItems: [String]
     
     @State var newStuff = Stuff(name: "")
+    @State var currentIndex = 0
     
     var body: some View {
         NavigationStack {
@@ -23,13 +24,6 @@ struct NewStuffView: View {
                 Text("Enter Bag Name")
                     .bold()
                     .font(.largeTitle)
-                //                    .padding()
-                
-                //                Image(systemName: "bag.badge.plus")
-                //                    .resizable()
-                //                    .scaledToFit()
-                //                    .frame(width: 100)
-                //                    .offset(x: -14)
                 
                 TextField("Bag Name", text: $newStuff.name)
                     .padding(10)
@@ -48,7 +42,6 @@ struct NewStuffView: View {
                                 Text(collectionItem)
                             }
                             .onDelete(perform: deleteItems)
-                            
                         }
                     }
                 }
@@ -67,18 +60,19 @@ struct NewStuffView: View {
                         .disabled(newStuff.name == "")
                     }
                 }
-            //                .navigationTitle("Enter Bag Name")
         }
     }
-    
     
     private func addStuff() {
         withAnimation {
             let newStuff = newStuff
             modelContext.insert(newStuff)
+            
             for collectionItem in collectionItems {
                 let newItem = Item(name: collectionItem, stuff: newStuff)
+                newItem.orderIndex = currentIndex
                 modelContext.insert(newItem)
+                currentIndex += 1
             }
         }
     }
