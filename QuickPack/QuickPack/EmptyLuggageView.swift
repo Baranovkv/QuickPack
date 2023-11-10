@@ -10,15 +10,21 @@ import SwiftUI
 struct EmptyLuggageView: View {
     var body: some View {
         VStack{
-            Image("travelbag")
+            Text(Date.now.formatted(date: .long, time: .standard))
+                .position(x:195, y:650)
+                .font(.footnote)
+            Image(systemName: "globe.europe.africa")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipped()
-                .padding(20)
+                .padding(80)
+                .position(x:195, y:30)
             Text("Let's create a new bag!")
                 .bold()
-                .font(.title)
+                .font(.largeTitle)
+                .position(x:195, y:-140)
         }
+        
     }
 }
 

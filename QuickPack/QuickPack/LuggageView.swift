@@ -31,7 +31,7 @@ struct LuggageView: View {
                         isModalPresented.toggle()
                     }) {
                         Text(Image(systemName: "plus"))
-                    }
+                    }.position(x:15, y:30)
                 }
                 
             }
